@@ -1,0 +1,165 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPcBcySNZ5wwoNY/QxemyA7",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    },
+    "accelerator": "GPU"
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Melo987/-v2/blob/main/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 2,
+      "metadata": {
+        "id": "6KhWe2u6WSG1",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "401b93ef-6621-4878-8ee1-92b63de41e0c"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+            "Requirement already satisfied: d2l in /usr/local/lib/python3.7/dist-packages (0.17.5)\n",
+            "Requirement already satisfied: jupyter==1.0.0 in /usr/local/lib/python3.7/dist-packages (from d2l) (1.0.0)\n",
+            "Requirement already satisfied: pandas==1.2.4 in /usr/local/lib/python3.7/dist-packages (from d2l) (1.2.4)\n",
+            "Requirement already satisfied: matplotlib==3.5.1 in /usr/local/lib/python3.7/dist-packages (from d2l) (3.5.1)\n",
+            "Requirement already satisfied: requests==2.25.1 in /usr/local/lib/python3.7/dist-packages (from d2l) (2.25.1)\n",
+            "Requirement already satisfied: numpy==1.21.5 in /usr/local/lib/python3.7/dist-packages (from d2l) (1.21.5)\n",
+            "Requirement already satisfied: nbconvert in /usr/local/lib/python3.7/dist-packages (from jupyter==1.0.0->d2l) (5.6.1)\n",
+            "Requirement already satisfied: notebook in /usr/local/lib/python3.7/dist-packages (from jupyter==1.0.0->d2l) (5.3.1)\n",
+            "Requirement already satisfied: ipykernel in /usr/local/lib/python3.7/dist-packages (from jupyter==1.0.0->d2l) (5.3.4)\n",
+            "Requirement already satisfied: qtconsole in /usr/local/lib/python3.7/dist-packages (from jupyter==1.0.0->d2l) (5.3.2)\n",
+            "Requirement already satisfied: jupyter-console in /usr/local/lib/python3.7/dist-packages (from jupyter==1.0.0->d2l) (6.1.0)\n",
+            "Requirement already satisfied: ipywidgets in /usr/local/lib/python3.7/dist-packages (from jupyter==1.0.0->d2l) (7.7.1)\n",
+            "Requirement already satisfied: kiwisolver>=1.0.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib==3.5.1->d2l) (1.4.4)\n",
+            "Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.7/dist-packages (from matplotlib==3.5.1->d2l) (21.3)\n",
+            "Requirement already satisfied: pyparsing>=2.2.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib==3.5.1->d2l) (3.0.9)\n",
+            "Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.7/dist-packages (from matplotlib==3.5.1->d2l) (0.11.0)\n",
+            "Requirement already satisfied: pillow>=6.2.0 in /usr/local/lib/python3.7/dist-packages (from matplotlib==3.5.1->d2l) (7.1.2)\n",
+            "Requirement already satisfied: fonttools>=4.22.0 in /usr/local/lib/python3.7/dist-packages (from matplotlib==3.5.1->d2l) (4.37.3)\n",
+            "Requirement already satisfied: python-dateutil>=2.7 in /usr/local/lib/python3.7/dist-packages (from matplotlib==3.5.1->d2l) (2.8.2)\n",
+            "Requirement already satisfied: pytz>=2017.3 in /usr/local/lib/python3.7/dist-packages (from pandas==1.2.4->d2l) (2022.2.1)\n",
+            "Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.7/dist-packages (from requests==2.25.1->d2l) (2022.6.15)\n",
+            "Requirement already satisfied: urllib3<1.27,>=1.21.1 in /usr/local/lib/python3.7/dist-packages (from requests==2.25.1->d2l) (1.24.3)\n",
+            "Requirement already satisfied: idna<3,>=2.5 in /usr/local/lib/python3.7/dist-packages (from requests==2.25.1->d2l) (2.10)\n",
+            "Requirement already satisfied: chardet<5,>=3.0.2 in /usr/local/lib/python3.7/dist-packages (from requests==2.25.1->d2l) (3.0.4)\n",
+            "Requirement already satisfied: typing-extensions in /usr/local/lib/python3.7/dist-packages (from kiwisolver>=1.0.1->matplotlib==3.5.1->d2l) (4.1.1)\n",
+            "Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.7/dist-packages (from python-dateutil>=2.7->matplotlib==3.5.1->d2l) (1.15.0)\n",
+            "Requirement already satisfied: tornado>=4.2 in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter==1.0.0->d2l) (5.1.1)\n",
+            "Requirement already satisfied: traitlets>=4.1.0 in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter==1.0.0->d2l) (5.1.1)\n",
+            "Requirement already satisfied: ipython>=5.0.0 in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter==1.0.0->d2l) (7.9.0)\n",
+            "Requirement already satisfied: jupyter-client in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter==1.0.0->d2l) (6.1.12)\n",
+            "Requirement already satisfied: decorator in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter==1.0.0->d2l) (4.4.2)\n",
+            "Requirement already satisfied: jedi>=0.10 in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter==1.0.0->d2l) (0.18.1)\n",
+            "Requirement already satisfied: pygments in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter==1.0.0->d2l) (2.6.1)\n",
+            "Requirement already satisfied: prompt-toolkit<2.1.0,>=2.0.0 in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter==1.0.0->d2l) (2.0.10)\n",
+            "Requirement already satisfied: pexpect in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter==1.0.0->d2l) (4.8.0)\n",
+            "Requirement already satisfied: backcall in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter==1.0.0->d2l) (0.2.0)\n",
+            "Requirement already satisfied: pickleshare in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter==1.0.0->d2l) (0.7.5)\n",
+            "Requirement already satisfied: setuptools>=18.5 in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter==1.0.0->d2l) (57.4.0)\n",
+            "Requirement already satisfied: parso<0.9.0,>=0.8.0 in /usr/local/lib/python3.7/dist-packages (from jedi>=0.10->ipython>=5.0.0->ipykernel->jupyter==1.0.0->d2l) (0.8.3)\n",
+            "Requirement already satisfied: wcwidth in /usr/local/lib/python3.7/dist-packages (from prompt-toolkit<2.1.0,>=2.0.0->ipython>=5.0.0->ipykernel->jupyter==1.0.0->d2l) (0.2.5)\n",
+            "Requirement already satisfied: widgetsnbextension~=3.6.0 in /usr/local/lib/python3.7/dist-packages (from ipywidgets->jupyter==1.0.0->d2l) (3.6.1)\n",
+            "Requirement already satisfied: ipython-genutils~=0.2.0 in /usr/local/lib/python3.7/dist-packages (from ipywidgets->jupyter==1.0.0->d2l) (0.2.0)\n",
+            "Requirement already satisfied: jupyterlab-widgets>=1.0.0 in /usr/local/lib/python3.7/dist-packages (from ipywidgets->jupyter==1.0.0->d2l) (3.0.3)\n",
+            "Requirement already satisfied: nbformat in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter==1.0.0->d2l) (5.4.0)\n",
+            "Requirement already satisfied: terminado>=0.8.1 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter==1.0.0->d2l) (0.13.3)\n",
+            "Requirement already satisfied: Send2Trash in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter==1.0.0->d2l) (1.8.0)\n",
+            "Requirement already satisfied: jupyter-core>=4.4.0 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter==1.0.0->d2l) (4.11.1)\n",
+            "Requirement already satisfied: jinja2 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter==1.0.0->d2l) (2.11.3)\n",
+            "Requirement already satisfied: pyzmq>=13 in /usr/local/lib/python3.7/dist-packages (from jupyter-client->ipykernel->jupyter==1.0.0->d2l) (23.2.1)\n",
+            "Requirement already satisfied: ptyprocess in /usr/local/lib/python3.7/dist-packages (from terminado>=0.8.1->notebook->jupyter==1.0.0->d2l) (0.7.0)\n",
+            "Requirement already satisfied: MarkupSafe>=0.23 in /usr/local/lib/python3.7/dist-packages (from jinja2->notebook->jupyter==1.0.0->d2l) (2.0.1)\n",
+            "Requirement already satisfied: mistune<2,>=0.8.1 in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter==1.0.0->d2l) (0.8.4)\n",
+            "Requirement already satisfied: bleach in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter==1.0.0->d2l) (5.0.1)\n",
+            "Requirement already satisfied: pandocfilters>=1.4.1 in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter==1.0.0->d2l) (1.5.0)\n",
+            "Requirement already satisfied: defusedxml in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter==1.0.0->d2l) (0.7.1)\n",
+            "Requirement already satisfied: testpath in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter==1.0.0->d2l) (0.6.0)\n",
+            "Requirement already satisfied: entrypoints>=0.2.2 in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter==1.0.0->d2l) (0.4)\n",
+            "Requirement already satisfied: fastjsonschema in /usr/local/lib/python3.7/dist-packages (from nbformat->notebook->jupyter==1.0.0->d2l) (2.16.1)\n",
+            "Requirement already satisfied: jsonschema>=2.6 in /usr/local/lib/python3.7/dist-packages (from nbformat->notebook->jupyter==1.0.0->d2l) (4.3.3)\n",
+            "Requirement already satisfied: pyrsistent!=0.17.0,!=0.17.1,!=0.17.2,>=0.14.0 in /usr/local/lib/python3.7/dist-packages (from jsonschema>=2.6->nbformat->notebook->jupyter==1.0.0->d2l) (0.18.1)\n",
+            "Requirement already satisfied: importlib-metadata in /usr/local/lib/python3.7/dist-packages (from jsonschema>=2.6->nbformat->notebook->jupyter==1.0.0->d2l) (4.12.0)\n",
+            "Requirement already satisfied: importlib-resources>=1.4.0 in /usr/local/lib/python3.7/dist-packages (from jsonschema>=2.6->nbformat->notebook->jupyter==1.0.0->d2l) (5.9.0)\n",
+            "Requirement already satisfied: attrs>=17.4.0 in /usr/local/lib/python3.7/dist-packages (from jsonschema>=2.6->nbformat->notebook->jupyter==1.0.0->d2l) (22.1.0)\n",
+            "Requirement already satisfied: zipp>=3.1.0 in /usr/local/lib/python3.7/dist-packages (from importlib-resources>=1.4.0->jsonschema>=2.6->nbformat->notebook->jupyter==1.0.0->d2l) (3.8.1)\n",
+            "Requirement already satisfied: webencodings in /usr/local/lib/python3.7/dist-packages (from bleach->nbconvert->jupyter==1.0.0->d2l) (0.5.1)\n",
+            "Requirement already satisfied: qtpy>=2.0.1 in /usr/local/lib/python3.7/dist-packages (from qtconsole->jupyter==1.0.0->d2l) (2.2.0)\n"
+          ]
+        }
+      ],
+      "source": [
+        "!pip install -U d2l"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install matplotlib==3.0"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "s3uhjtZJXIZm",
+        "outputId": "b44adc18-5e5b-4346-eae5-3c8f3787f396"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+            "Requirement already satisfied: matplotlib==3.0 in /usr/local/lib/python3.7/dist-packages (3.0.0)\n",
+            "Requirement already satisfied: numpy>=1.10.0 in /usr/local/lib/python3.7/dist-packages (from matplotlib==3.0) (1.21.5)\n",
+            "Requirement already satisfied: python-dateutil>=2.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib==3.0) (2.8.2)\n",
+            "Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,>=2.0.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib==3.0) (3.0.9)\n",
+            "Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.7/dist-packages (from matplotlib==3.0) (0.11.0)\n",
+            "Requirement already satisfied: kiwisolver>=1.0.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib==3.0) (1.4.4)\n",
+            "Requirement already satisfied: typing-extensions in /usr/local/lib/python3.7/dist-packages (from kiwisolver>=1.0.1->matplotlib==3.0) (4.1.1)\n",
+            "Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.7/dist-packages (from python-dateutil>=2.1->matplotlib==3.0) (1.15.0)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import torch\n",
+        "from torch import nn\n",
+        "from d2l import torch as d2l\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "PUlmN_jjXrep"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
